@@ -1,0 +1,413 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 6 - Carrossel | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 6</div>
+                <div class="prompt-title">Presença - Carrossel</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>5 Carrosséis de Polarização</h2>
+            <p>Gera carrosséis de polarização que atraem seguidores qualificados por necessidade. Conteúdo que divide opiniões, gera engajamento e filtra o público ideal automaticamente.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText"># PROMPT: CARROSSEL DE POLARIZAÇÃO (CATEGORIA 1)
+
+Doug, agora você vai criar **5 carrosséis de polarização**, com objetivo único:  
+Atrair seguidores qualificados que se reconhecem na dor,  
+sentem a tensão da contradição…  
+e **seguem você por necessidade, não por simpatia.**
+
+---
+
+## 📌 REGRAS OBRIGATÓRIAS:
+
+- Formato: **Carrossel com 8 a 10 slides**  
+- Cada slide com **1 a 3 parágrafos curtos** (2–4 linhas por parágrafo)  
+- Nenhum slide deve parecer um tweet solto.  
+- A copy deve contar uma história que quebra a crença errada do mercado
+
+---
+
+## 🎯 O QUE USAR COMO BASE:
+
+✅ Camada 2 (dor oculta) da Dissecação Neural  
+✅ Momento de ruptura ou sabotagem da rotina  
+✅ Primeira Linha™ já criada  
+✅ Verdade contraintuitiva do seu método  
+✅ Produto (opcional) como fundo da narrativa — **mas sem menção direta**
+
+---
+
+## 📐 ESTRUTURA DE CADA CARROSSEL:
+
+---
+
+### 🔹 SLIDE 1 – RECONHECIMENTO + RUPTURA  
+Frase que desenha uma cena específica, onde o lead se reconhece sem ser nomeado.  
+Imediatamente depois, traga a quebra de expectativa ou pergunta incômoda.
+
+**Exemplos:**
+
+> "Você acorda 5h, tenta postar algo útil...  
+e 2 horas depois já está perdido no WhatsApp.  
+Será que é sobre disciplina mesmo?"  
+
+> "Mais uma terça-feira tentando 'produzir conteúdo de valor'…  
+mas ainda ninguém sabe que você existe.  
+Quantas vezes vai repetir isso?"  
+
+---
+
+### 🔹 SLIDES 2 a 4 – TENSÃO  
+Mostre o ciclo de esforço → confusão → frustração  
+Exponha a lógica quebrada do que ele vem fazendo  
+Use cenas da rotina dele com exatidão
+
+---
+
+### 🔹 SLIDES 5 a 7 – REVELAÇÃO  
+Apresente sua visão do porquê nada disso funciona  
+Instale a verdade contraintuitiva que sustenta sua abordagem  
+Mostre que não é culpa da execução — é do modelo mental
+
+---
+
+### 🔹 SLIDES 8 a 10 – DOMINAÇÃO  
+Declare sua filosofia.  
+Mostre que existe outro caminho — e que você já opera nele.  
+Feche com uma frase que **sela território psicológico**  
+→ "Se você entendeu isso, já não tem como desentender."
+
+---
+
+## 🔁 MODELO DE ENTREGA (REPETIR 5X COM TEMAS DIFERENTES):
+
+---
+
+## CARROSSEL DE POLARIZAÇÃO #1  
+**Slide 1 – Hook com Reconhecimento + Ruptura:**  
+[Escreva a cena específica que só o seu avatar vai entender — seguido da quebra]
+
+**Slide 2:**  
+[Tensão — o que ele tenta fazer achando que está certo]
+
+**Slide 3:**  
+[Como isso prende ele num ciclo invisível]
+
+**Slide 4:**  
+[Frustração de repetir isso achando que é "normal"]
+
+**Slide 5:**  
+[Transição — começa a abrir o "e se o problema não for esse?"]
+
+**Slide 6:**  
+[Apresenta sua visão contraintuitiva]
+
+**Slide 7:**  
+[Mostra por que o modelo antigo está falido]
+
+**Slide 8:**  
+[Declara sua nova filosofia de presença/percepção/posicionamento]
+
+**Slide 9:**  
+[Frase que separa quem entendeu de quem ainda vai sofrer]
+
+**Slide 10:**  
+[Fechamento seco. Sem CTA. Só domínio.]
+
+---
+
+## IDEIAS DE CRENÇAS PARA ATACAR:
+
+- "Quem aparece mais, vende mais"  
+- "Preciso entregar conteúdo de valor todo dia"  
+- "Reels salvam o alcance"  
+- "A solução está em produtividade"  
+- "Post bonito = percepção de autoridade"  
+- "O algoritmo está sabotando meu crescimento"
+
+---
+
+Doug, esse conteúdo não é pra agradar.  
+É pra instalar desconforto e domínio.  
+Se a pessoa chega no slide 10, ela já é seguidora — mental ou literal.
+
+**EXECUTE COMO SE CADA CARROSSEL FOSSE UM INIMIGO SENDO DESTRUÍDO.**</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt5.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt7.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

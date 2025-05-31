@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 2 - Offer Suite | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 2</div>
+                <div class="prompt-title">Narrativa - Offer Suite</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Duas Ofertas Estratégicas</h2>
+            <p>Este prompt gera um sistema de ofertas duplo: produto de entrada (R$100-500) que qualifica e produto premium (R$3000+) que monetiza. A estratégia completa de escalada de valor que funciona.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText">Doug, agora preciso que você crie DUAS OFERTAS — uma micro (R$ 100–500) e uma de sistema (R$ 3.000+) — que TRANSFORMEM as dores reais do avatar em DINHEIRO IMEDIATO.
+
+Você já mapeou a mente do avatar com a dissecação neural.  
+Então não venha com genérico, não repita fórmulas e **NÃO USE EXEMPLOS PRONTOS.**  
+Tudo aqui tem que ser **sob medida**, como se esse avatar fosse um cliente seu que vai te pagar 6 dígitos se isso vender.
+
+---
+
+# 🔥 ENTREGUE COM FORMATAÇÃO GOOGLE DOCS:
+- # para títulos  
+- ## para subtítulos  
+- **negrito** para ênfase  
+- Separação clara entre blocos  
+- Nome de produto = curto, memorável, impossível de ignorar  
+- Subtítulo = promessa tensa com mecanismo claro e incompleto
+
+---
+
+# AQUI ESTÁ O QUE VOCÊ VAI VENDER
+
+---
+
+## PRODUTO 1: RESOLVA UMA DOR ESPECÍFICA E COBRE R$ 100 a R$500
+
+**NOME DO PRODUTO:**  
+Ignore completamente palavras como "mini", "básico" ou "simples" - elas destroem valor percebido. Construa usando elementos que soam PREMIUM e ESCASSOS: Workshop, Masterclass, Treinamento, Kit, Sistema, Protocolo. Adicione SEMPRE um número específico (4 módulos, 7 etapas, 12 templates) focado na MICRO VITÓRIA de 7 dias, não no resultado final. O nome deve prometer apenas o que acontece na primeira semana - isso cria urgência sem soar impossível para um produto de R$ 100.
+EXEMPLO: "Workshop 7 Dias Primeiro Cliente" / "Kit 4 Etapas Primeira Venda" / "Sistema 48h Validação"
+
+**HEADLINE:**  
+Construa prometendo uma MICRO VITÓRIA específica e mensurável em exatamente 7 dias - isso deve ser algo que eles possam ver, medir ou mostrar para outros como prova de progresso. Estruture assim: 1) ESPECIFICIDADE BRUTAL - defina exatamente quem é o cliente e qual micro resultado obtém em 7 dias; 2) PROMESSA DE VITÓRIA RÁPIDA - um resultado específico que acontece na primeira semana para criar vício; 3) FACILIDADE EXTREMA - remova todo medo com "mesmo se" seguido da maior objeção; 4) ENTREGA VISUAL - mencione exatamente o que recebem (planilhas, templates, scripts prontos). A micro vitória deve ser o anzol que os força a querer o resultado completo de 20K+ por mês.
+EXEMPLO: "Workshop 7 Dias que Gera Seu Primeiro Cliente Pagando R$ 500 em Uma Semana - Roteiro Passo-a-Passo + Scripts Prontos (mesmo se você nunca vendeu nada online)"
+
+
+
+**DOR ESPECÍFICA QUE RESOLVE:**  
+A dor mais humilhante, silenciosa e real que o avatar sente e nunca posta.
+
+### ESTRUTURA DE ENTREGA:
+
+⚠️ IMPORTANTE: Não entregue um curso em miniatura.
+Esse produto existe pra gerar impulso, alívio e vício.
+O cliente compra e aplica em horas — e já sente que precisa da versão maior.
+
+**• COMPONENTE 1**  
+- O que é:  
+- Como entregar:  
+- Por que funciona:
+
+**• COMPONENTE 2**  
+- O que é:  
+- Como entregar: 
+- Por que funciona:
+
+**• COMPONENTE 3**  
+- O que é:  
+- Como entregar: 
+- Por que funciona:
+
+**PREÇO RECOMENDADO:**  
+R$ [coloque o preço exato que causa impulso no avatar]
+
+**JUSTIFICATIVA:**  
+Por que esse valor gera compra sem hesitação — baseado em urgência e alívio.
+
+**RESULTADO MENSURÁVEL:**  
+O que muda em 72h (story, inbox, perfil, percepção, DM, CTA, etc.)
+
+**LIMITAÇÃO NATURAL:**  
+O que o produto não resolve — e que só o próximo passo corrige. Deixe a ferida aberta.
+
+
+**VOCABULÁRIO DO AVATAR:**  
+Inclua pelo menos uma frase ou expressão típica do avatar que você identificou na dissecação — algo que ele mesmo diria no inbox ou em voz alta. Isso aumenta conexão instantânea e reduz distância.
+
+
+
+
+---
+
+## PRODUTO 2: SISTEMA COMPLETO (R$ 3.000+)
+
+**NOME DO PRODUTO:**  
+Elimine qualquer referência a tempo ou etapas específicas - isso limita o valor percebido. MAIS IMPORTANTE: evite nomes óbvios como "Sistema 6 Figuras", "Método Autoridade" ou qualquer variação que 500 coaches já usaram. Crie algo ÚNICO combinando conceitos inesperados: "Protocolo Anti-Commoditização", "Sistema Polarização Magnética", "Método Especialista Fantasma". Use palavras que comunicam EXCLUSIVIDADE REAL, não chavões batidos. O nome deve soar como algo que NINGUÉM mais tem e que eles nunca ouviram falar.
+EXEMPLO: "Protocolo Invisível-Magnético" / "Sistema Autoridade Silenciosa" / "Método Anti-Commoditização Total"
+
+
+
+**HEADLINE:**  
+Construa prometendo transformação completa da ROTINA + PRESENÇA + CAIXA em 30-45 dias (sem mencionar o prazo diretamente). Estruture assim: 1) PROBLEMA GIGANTE - identifique a dor que impede eles de ter a vida dos sonhos; 2) TRANSFORMAÇÃO TOTAL - prometa mudança completa de patamar de vida, não apenas resultado específico; 3) SISTEMA COMPLETO - mencione que inclui TUDO necessário para nunca mais ter o problema; 4) EXCLUSIVIDADE BRUTAL - posicione como método secreto usado apenas pelos "de dentro". A headline deve fazer eles sentirem que toda a vida deles mudará para sempre se comprarem.
+EXEMPLO: "O Sistema Completo que Transforma Especialistas Invisíveis em Autoridades de R$ 50K/Mês - Método Usado Pelos Top 1% + Tudo Incluído (mesmo se você começar do zero absoluto)"
+
+
+
+**TRANSFORMAÇÃO PROMETIDA:**  
+De onde o avatar está agora (cansado, travado, desvalorizado) até onde ele sonha estar (respeitado, posicionado, faturando com clareza).
+
+---
+
+### ESTRUTURA DE ENTREGA
+
+**MÓDULO 1: [Nome Brutal]**  
+- Entrega:  
+- Duração:  
+- Necessidade:  
+- Conexão com Produto 1:
+
+**MÓDULO 2:**  
+(...)
+
+**MÓDULO 3:**  
+(...)
+
+**MÓDULO 4:**  
+(...)
+
+---
+
+**PREÇO RECOMENDADO:**  
+R$ [entre 3.000 e 10.000]
+
+**JUSTIFICATIVA:**  
+Esse sistema substitui anos de tentativa e erro. Corrige posicionamento, percepção e sistema de lucro.
+
+**POSICIONAMENTO ESTRATÉGICO:**
+
+- Não é curso  
+- Não é mentoria  
+- É a cirurgia que mata a identidade velha e instala a nova
+
+
+---
+
+## ESTRATÉGIA DE CONEXÃO ENTRE PRODUTOS
+
+**TIMING IDEAL:**  
+Dia X após Produto 1 — quando a dor evolui e o avatar percebe que precisa de mais estrutura.
+
+**EMOÇÃO GERADA:**  
+Frustração elegante: "comecei a aparecer, mas agora não sei sustentar."
+
+**UPGRADE NATURAL:**  
+Frase que conecta os pontos:  
+> "Você ativou a atenção. Agora precisa ativar o sistema."
+
+**INCENTIVO REAL:**  
+Desconto, bônus, ou desbloqueio de algo estratégico. Nada decorativo.
+
+**JANELA DE DECISÃO:**  
+3 a 7 dias. Depois, acabou.
+
+---
+
+Doug, o que você vai criar agora é o que separa produto de verdade de oferta decorativa.
+A diferença entre vender todo dia…
+ ou continuar esperando o lead certo aparecer.
+
+**EXECUTE. TUDO. AGORA.**</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt1.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt3.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

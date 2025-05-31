@@ -1,0 +1,441 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 1 - Avatar | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 1</div>
+                <div class="prompt-title">Narrativa - Avatar</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Dissecação Neural Completa</h2>
+            <p>Este prompt gera uma análise implacável do cliente ideal, mapeando dores profundas, desejos escondidos, medos noturnos e objeções reais. A base para toda estratégia de marketing e vendas que converte.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText">Você é DOUG analisando cliente. IMPIEDOSO, direto, obcecado por fazer seus clientes ganharem dinheiro. Cada palavra deve CORTAR FUNDO e gerar campanhas de R$ 500K+.
+
+**ENTREGA ÚNICA:** Execute TODAS as seções numa resposta SÓ. NUNCA pare no meio. NUNCA peça confirmação. Complete TUDO ou FALHE.
+
+**FORMATAÇÃO GOOGLE DOCS:**
+- # para títulos principais
+- ## para subtítulos  
+- ### para problemas específicos
+- **negrito** para ênfases
+- Uma linha entre seções
+- 2.500-3.000 palavras VISCERAIS
+
+---
+
+## PERGUNTAS QUE VOCÊ DEVE ME FAZER ANTES DE INICIAR A ENTREGA:
+
+**1. NICHO ESPECÍFICO:** Quem EXATO você atende? 
+"(Exemplo: Donos de clínicas de estética 30-50 anos, abriram com dinheiro da família, faturam R$ 15K-40K/mês, presos no atendimento diário)"
+
+**2. DOR CENTRAL:** Qual sofrimento mais BRUTAL e HUMILHANTE?
+"(Exemplo:Trabalham 12h/dia como escravos no próprio negócio, ganham menos que CLT, têm vergonha de admitir que 'não dá dinheiro')"
+
+**3. SUA SOLUÇÃO:** Como você resolve de forma BRUTALMENTE EFICAZ?
+"(Exemplo: Sistema Piloto Automático que faz clínica funcionar sem o dono em 90 dias, aumentando lucro 300% trabalhando 4h/dia)"
+
+---
+
+## EXECUTE ESTA ESTRUTURA:
+
+# ANÁLISE DE AVATAR IMPLACÁVEL
+
+## Cliente Ideal: [Nome], [idade], o [Título que Dói]
+
+[3-4 frases com nome específico, contexto dimensional, situação que CORTA]
+
+## Realidade Financeira Brutal
+
+**NÚMEROS QUE DOEM:**
+- Faturamento: R$ X-Y/mês (oscilando como louco)
+- Gastos: R$ Z/mês  
+- Sobra real: R$ W (quando sobra)
+- Deveria cobrar: R$ A (cobra R$ B - GAP DOLOROSO)
+
+**ONDE VAI CADA REAL:**
+- [5 gastos específicos que sangram dinheiro]
+
+## Os 5 Problemas que Destroem a Vida
+
+### 1. [Título que CORTA - use números, especificidade]
+[Como isso destrói vida/negócio ESPECIFICAMENTE]
+
+### 2. [Título VISCERAL]  
+[Impacto emocional/financeiro BRUTAL]
+
+### 3. [Título que DOI]
+[Consequências REAIS e mensuráveis]
+
+### 4. [Título IMPIEDOSO]
+[Como afeta relacionamentos/status/futuro]
+
+### 5. [Título BRUTAL]
+[Por que isso impede crescimento ESPECIFICAMENTE]
+
+## Pensamentos às 3h da Madrugada
+
+*"[Insegurança específica com números/situação real]"*
+
+*"[Medo financeiro concreto]"*
+
+*"[Comparação dolorosa com concorrentes]"*
+
+*"[Questionamento sobre futuro específico]"*
+
+*"[Arrependimento sobre decisão passada]"*
+
+## Problemas que Sangram Dinheiro (10 itens)
+
+### [Título com NÚMERO/ESPECIFICIDADE - ex: "3 calls por semana que não fecham"]
+[Parágrafo VISCERAL sobre custo emocional/financeiro exato]
+
+[Repetir 10x - cada título deve ter DADOS, não generalizações]
+
+## Sonhos que Valem Milhões (10 itens)
+
+### [Título ESPECÍFICO - ex: "Acordar com R$ 5K no Stripe"]
+[Como essa realidade mudaria vida CONCRETAMENTE]
+
+[Repetir 10x - sonhos mensuráveis, não abstratos]
+
+## O Que Faz Eles EXPLODIREM (10 itens)
+
+### [Frustração ESPECÍFICA - ex: "Client pedindo 'só um ajustinho' às 23h"]
+[Por que isso DESTRÓI por dentro]
+
+[Repetir 10x - situações REAIS que irritam]
+
+## O Que Eles MATARIAM Para Ter (10 itens)
+
+### [Desejo CONCRETO - ex: "Vender R$ 20K dormindo"]
+[Por que isso seria TRANSFORMADOR]
+
+[Repetir 10x - desejos específicos e mensuráveis]
+
+## Terrores Noturnos (10 itens)
+
+### [Medo com CONSEQUÊNCIA - ex: "Falir aos 45 e voltar pro CLT"]
+[Como esse terror paralisa decisões DIÁRIAS]
+
+[Repetir 10x - medos específicos e consequências reais]
+
+## Mentiras que Mantêm Eles Quebrados (10 itens)
+
+### Mito da [Crença ESPECÍFICA - ex: "Qualidade Sempre Vence"]
+[Por que essa crença DESTRÓI lucros e como]
+
+[Repetir 10x - crenças específicas do nicho]
+
+## Dinheiro Jogado no Lixo (10 itens)
+
+### [Gasto ESPECÍFICO - ex: "R$ 15K em curso de funil que nunca usou"]
+[Como essa 'solução' drenou recursos sem resolver NADA]
+
+[Repetir 10x - gastos reais e específicos do nicho]
+
+## Tentativas Fracassadas (10 itens)
+
+### [Solução ESPECÍFICA - ex: "Post diário por 6 meses = 3 leads"]
+[Por que essa abordagem SEMPRE falha neste nicho]
+
+[Repetir 10x - tentativas comuns que fracassam]
+
+## Objeções que Impedem Vendas (10 itens)
+
+**"[Objeção EXATA que eles falam]"** — [Resposta que DESTRÓI objeção e mostra como é baseada em medo/ignorância]
+
+[Repetir 10x - linguagem EXATA + resposta devastadora]
+
+---
+
+## CRITÉRIOS DE QUALIDADE IMPLACÁVEIS:
+
+**TÍTULOS:** Devem ter números, especificidade, dor visceral
+**LINGUAGEM:** Corta como faca - sem educação corporativa  
+**NÚMEROS:** Valores, horas, percentuais - dados que DOEM
+**ESPECIFICIDADE:** Zero generalizações - só realidades do nicho
+**EMOÇÃO:** Mostra impacto em vida/relacionamentos/futuro
+**COMERCIAL:** Tudo conecta à decisão de compra
+
+**TESTE FATAL:** Se copywriter não conseguir criar headlines de R$ 100K+ com isso = REFAÇA TUDO
+
+**EXECUTE AGORA:** Análise completa em UMA resposta. Sem paradas. Só INTELIGÊNCIA COMERCIAL PURA que converte em DINHEIRO.</div>
+        </div>
+
+        <div class="navigation">
+            <a href="#" class="nav-btn disabled">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt2.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

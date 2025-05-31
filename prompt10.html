@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 10 - Levantada de Mão | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 10</div>
+                <div class="prompt-title">Monetização - Levantada de Mão</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Campanha Premium via Stories</h2>
+            <p>Campanha completa para produtos premium via stories e DMs estratégicas. Sistema que identifica interessados qualificados e converte em clientes de alto valor sem parecer vendas.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText"># PROMPT MONETIZAÇÃO COM AUDIÊNCIA – PRODUTO PREMIUM (LEVANTADA DE MÃO™)
+
+Doug, agora você vai criar uma **campanha completa de monetização para produtos acima de R$ 3.000**, utilizando a estratégia **Levantada de Mão™** — um sistema direto e cirúrgico que filtra, qualifica e converte apenas os leads prontos.
+
+Essa estratégia deve começar com um **story único**, seguido de uma **sequência completa de mensagens diretas** — sem calls, sem enrolação, sem scripts genéricos.
+
+---
+
+## 🎯 OBJETIVO
+
+Transformar uma simples story em um funil de conversão de alto ticket, com:
+- Story de ativação brutal (sem parecer anúncio)
+- Sequência de DMs com posicionamento forte
+- Estrutura de venda que conduz, não convence
+- Processo de follow-up com fechamento
+
+Tudo 100% conectado com a **dissecação neural atual** e os **produtos já definidos**.
+
+---
+
+## 📲 STORY DE LEVANTADA DE MÃO™
+
+```
+Procuro 4 especialistas que querem vender consultorias a R$3K+
+sem depender de Reels, tráfego ou call de convencimento.
+
+Me manda a palavra "SISTEMA" na DM que te explico como.
+```
+
+---
+
+## 💬 SEQUÊNCIA COMPLETA DE DMs – VENDA INVISÍVEL
+
+### 🟢 ETAPA 1: CONEXÃO
+
+```text
+[Nome], vi sua mensagem.
+
+Antes de te mostrar o sistema, preciso validar se faz sentido pra você agora.
+
+Vou te fazer 2 perguntas rápidas — responde com clareza, beleza?
+```
+
+### 🔍 ETAPA 2: QUALIFICAÇÃO
+
+```text
+Hoje, qual é o seu ticket médio? E o que você costuma entregar nesse valor?
+```
+*(aguarde resposta)*
+
+```text
+Me fala mais sobre o que trava você hoje pra subir esse preço sem medo. Quero entender a raiz do problema, não o sintoma.
+```
+*(aguarde resposta)*
+
+### 🎯 ETAPA 3: AUTORIDADE
+
+```text
+Certo. Aqui entra algo importante:
+
+[INSTRUÇÃO: aqui o operador deve agregar valor com base na resposta do lead — apontar o verdadeiro problema, dar clareza sobre o que está travando, e mostrar o custo de não agir. Não use exemplo genérico. Essa parte é cirúrgica.]
+
+EXEMPLO (se a dor for posicionamento fraco):
+
+Entendo perfeitamente. Isso é mais comum do que parece — mas continua sendo um erro caro.
+
+O problema não é sua entrega.
+É que o seu perfil ainda te posiciona como "inteligente e acessível", quando deveria te posicionar como "indiscutivelmente premium".
+
+Leads certos não hesitam com preço. Eles hesitam com percepção fraca.
+```
+
+### 📄 ETAPA 4: OFERTA + LINK DO DOC
+
+```text
+Consigo te ajudar com isso.
+Tenho um doc direto com toda a estrutura do programa. Algo bem direto ao ponto — 3 minutos de leitura.
+
+Se eu te mandar agora, você consegue ler ainda hoje?
+```
+*(aguarde resposta)*
+
+```text
+Perfeito. Aqui está o material: [link do Google Doc]
+
+Dá uma lida com calma.
+Depois me fala o que mais te incomodou no que leu — porque é exatamente aí que a gente atua.
+```
+
+---
+
+## ❗TRATAMENTO DE OBJEÇÕES
+
+### OBJEÇÃO 1: "Tá caro"
+```text
+Você cobra X… mas não cobra 3X porque ainda se apresenta como opção confortável.
+
+A pergunta não é "quanto custa esse sistema".
+É: "quanto já te custou não parecer premium?"
+```
+
+### OBJEÇÃO 2: "Preciso pensar"
+```text
+Claro. Me fala o que exatamente você precisa pensar.
+Talvez eu possa esclarecer agora — ou talvez você só esteja buscando permissão pra fazer o que já sabe que precisa.
+```
+
+### OBJEÇÃO 3: "Gostei, mas…"
+```text
+Se isso já te tocou, você sabe que o problema não é técnico. É percepção.
+
+Agora você escolhe:
+Quer resolver ou quer continuar entendendo?
+
+Se for resolver, eu te mostro como.
+Se for entender, tudo certo — só não confunda aprendizado com progresso.
+```
+
+---
+
+## 🔁 MECANISMO DE FOLLOW-UP – 3 TOQUES
+
+### ⏳ FOLLOW 1 – 24 HORAS
+```text
+Conseguiu dar uma olhada no material?
+
+Se não for o momento, tudo certo — mas sigo com quem está pronto.
+Esse sistema não funciona em cima do muro.
+```
+
+### ⏳ FOLLOW 2 – 48 HORAS
+```text
+Sumiu, [nome]? Só te aviso que vou fechar essa rodada com quem respondeu até hoje.
+
+Se quiser seguir, me dá um alô agora.
+```
+
+### ❌ FOLLOW FINAL – ENCERRAMENTO (72 HORAS)
+```text
+Encerrando aqui sua linha de acesso ao sistema.
+
+Quando quiser parar de ser mais um especialista e se tornar uma autoridade premium, sabe onde me encontrar.
+
+Boa sorte na jornada.
+```
+
+---
+
+Doug, utilize a **dissecação neural atual e os produtos já definidos**.
+Esse é um funil invisível, mas implacável.
+
+**EXECUTE AGORA.**</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt9.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt11.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

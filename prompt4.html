@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 4 - Copy R$3000+ | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 4</div>
+                <div class="prompt-title">Narrativa - Copy R$3000+</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Copy de Alto Impacto</h2>
+            <p>Copy para sistema completo/mentoria premium (R$3000+). Estrutura para conversão elevada focada em transformação total e status. Para quem já demonstrou interesse e qualificação.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText"># PROMPT PRODUTO DE R$ 3.000+: COPY FINAL PROFISSIONAL
+
+Doug, agora você vai escrever a **copy final e completa** do sistema completo (R$ 3.000+).  
+
+**Não quero estrutura genérica. Não quero introdução motivacional.**  
+Quero **uma copy profissional, de alto impacto comercial, pronta para ser colada em uma página e usada em tráfego, e-mails e conversão direta.**
+
+Você vai usar o **nome e estrutura exata do sistema já criado anteriormente**.  
+E vai escrever como um copywriter que está fechando **um projeto de 7 dígitos com um cliente que só respeita lógica, impacto e lucro.**
+
+---
+
+## FORMATO:
+
+---
+
+### **HEADLINE PRINCIPAL:**  
+Frase com impacto imediato. Acusação direta. Use estrutura:  
+> "Enquanto você [comportamento comum], pessoas com metade do seu conhecimento estão [resultado elevado]."  
+Precisa provocar **vergonha funcional**, não curiosidade. Nada metafórico — ataque a realidade perceptiva do avatar.
+
+---
+
+### **SUBTÍTULO:**  
+Explique em 1 frase **o que o sistema muda** na vida do cliente, e **por que ele precisa disso agora.**  
+Use estrutura:  
+> "O único sistema que transforma [identidade atual dolorosa] em [nova identidade desejada] — sem [sacrifício indesejado]."
+
+---
+
+### **INTRODUÇÃO:**  
+Construa o drama.  
+Use 3 parágrafos para expor:
+
+1. Como o avatar é visto hoje, mesmo sendo bom no que faz  
+2. Quanto dinheiro e respeito ele perde diariamente por não parecer premium  
+3. Como isso afeta decisões reais (precificação, posicionamento, aceitação de clientes errados, etc.)
+
+Não use metáforas. Use **comparações entre o que ele entrega e como é tratado.**
+
+---
+
+### **A FALTA DE PERCEPÇÃO ESTÁ CUSTANDO CARO:**  
+Explique como o avatar se transformou num "operador invisível":  
+> Ele entrega como profissional de elite, mas **soa como generalista.**  
+> É respeitado só por quem já o conhece.  
+> O feed dele não protege. Não vende. Não impõe.
+
+---
+
+### **A VIRADA:**  
+Apresente o insight contraintuitivo que muda tudo.  
+Use estrutura:  
+> "O problema não é o conteúdo. É a arquitetura da percepção."  
+> "Não é o que você entrega. É o que o mercado enxerga quando olha pra você."
+
+Posicione o sistema como **a ferramenta que reconstrói a identidade comercial dele com intencionalidade.**
+
+---
+
+### **O MÉTODO:**  
+Explique como o sistema funciona com clareza cirúrgica.  
+Evite jargões. Use sequência simples.  
+Exemplo:
+
+1. Diagnóstico (quem você realmente parece ser hoje)  
+2. Redefinição (nova bio, presença, grid, story)  
+3. Instalação do ecossistema invisível  
+4. Ativação da oferta que vende por presença
+
+---
+
+### **ESTRUTURA MODULAR (4 BLOCOS):**  
+Cada módulo deve soar como um **bloco de construção de uma identidade dominante.**
+
+Use formato:
+
+**MÓDULO 1 – [NOME PODEROSO]**  
+• Entrega:  
+• Como muda a percepção:  
+• Por que vem antes de tudo:
+
+(... repetir até o Módulo 4)
+
+---
+
+### **RESULTADO MENSURÁVEL (7 DIAS):**  
+Descreva o que muda em até 7 dias de aplicação.  
+Use linguagem visual e mensurável:  
+- Story que gera reply sem CTA  
+- Inbox com lead dizendo "como funciona"  
+- Gente começando a imitar sua bio  
+- Feed com aura de "isso é de alguém que já fatura alto"
+
+---
+
+### **PREÇO E ENTREGA:**  
+Sequência obrigatória:
+
+1. Calcule o prejuízo anual invisível por não parecer premium  
+2. Compare com custos de alternativas (branding, consultoria, posicionamento, agência)  
+3. Apresente o sistema como atalho cirúrgico  
+4. Revele o preço (R$ 3.000 a R$ 5.000) como fração do desperdício atual  
+5. Finalize com CTA que **parece decisão lógica, não impulso emocional**
+
+---
+
+### **GARANTIA:**  
+Escreva com tom de frieza racional:  
+> "Se em 7 dias você aplicar e não tiver resposta perceptiva real (leads, respostas, convites), você desbloqueia 1:1 estratégico — sem custo. Mas tem que provar que aplicou."
+
+---
+
+### **OBJEÇÕES (7 TOTAL):**
+
+1–3 → As 3 que o lead realmente diria:  
+- "Mas já fiz mentoria e não adiantou"  
+- "Meu nicho é diferente"  
+- "Parece caro"
+
+4–7 → Objeções invisíveis que ele sente, mas não verbaliza:  
+- "E se eu aplicar e ninguém notar?"  
+- "Será que isso serve pra quem não aparece muito?"  
+- "E se minha imagem for o problema?"  
+- "E se eu virar só mais um com 'feed bonito'?"
+
+Para cada uma, escreva a objeção como pergunta e **responda com lógica e impacto.** Não contorne — destrua.
+
+---
+
+### **PROVAS:**  
+Use o que tiver. Exemplo:
+
+- Print de inbox com resposta inesperada  
+- Comparativo de antes/depois de bio  
+- Frase real de cliente (ou simulação realista)  
+- Gatilho visual (doc, template, feed)
+
+---
+
+### **FAQ:**  
+Cada pergunta deve **vender uma vantagem extra.**
+
+Use formato:
+
+> **"Quanto tempo preciso pra aplicar?"**  
+> 1 hora por dia durante 3 dias.  
+> Isso significa que em menos de uma semana você pode ter um feed que protege seu preço e seleciona cliente.
+
+---
+
+### **FECHAMENTO:**  
+Crie o ultimato racional:
+
+> "Você tem duas opções: continuar sendo percebido como mão de obra bem falante — e seguir perdendo oportunidades, ou ativar agora o sistema que transforma o que você entrega em autoridade visível e lucrativa."
+
+Finaliza com CTA que parece inevitável.
+
+---
+
+**A copy precisa:**
+
+- Ser 100% colável em Google Docs  
+- Ser usada como texto de VSL ou página de vendas  
+- Criar tensão de urgência sem escassez forçada  
+- Gerar desejo sem parecer truque
+
+**EXECUTE COMO COPYWRITER DE ELITE. SEM DESCULPAS. SEM SUPERFÍCIE.**  
+Texto final. Profissional. Imediatamente utilizável.</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt3.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt5.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,371 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 3 - Copy R$100 | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 3</div>
+                <div class="prompt-title">Narrativa - Copy R$100</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Copy Final Profissional</h2>
+            <p>Gera copy completa para produto de entrada (R$100-500) pronta para colar e vender. Estrutura testada que converte leads qualificados em primeiros clientes pagantes.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText">COPY FINAL DO PRODUTO DE ENTRADA (R$ 100–500)
+
+Doug, agora você vai escrever a copy final e completa para o produto de entrada.
+
+**Não quero esboço. Não quero estrutura genérica.**  
+Quero **copy profissional, pronta pra colar numa página e vender** — com ritmo, argumento, provas e CTA.
+
+Você vai usar o nome e entregáveis exatos do produto criado anteriormente.  
+E vai construir o texto como um copywriter de elite:  
+- Dor real  
+- Tensão invisível  
+- Proposta simples  
+- Mecanismo irresistível  
+- Conversão sem fricção
+
+---
+
+## FORMATO:
+
+**TÍTULO:** 
+Crie uma declaração brutal e específica sobre o problema que está custando dinheiro ao leitor HOJE. Use linguagem direta que force o reconhecimento imediato: "Você está [ação específica] e isso está [consequência mensurável]". Evite metáforas - seja literal e dolorosamente preciso sobre a realidade atual deles.
+
+**SUBTÍTULO:** 
+O que a pessoa vai conquistar. Como. Sem rodeios. Escreva de uma maneira que vá de encontro absoluto com o desejo dela, para que seja impossível não ler o restante da copy
+
+**INTRODUÇÃO:** 
+Construa em 3 parágrafos escalando a dor:
+Parágrafo 1: Identifique o custo financeiro imediato do problema
+Parágrafo 2: Amplifique as consequências de inação por mais 30-90 dias  
+Parágrafo 3: Projete o cenário catastrófico se nada mudar em 1 ano
+Cada frase deve aumentar a urgência emocional e financeira.
+
+**A VIRADA:** 
+Apresente uma revelação que reframe completamente o problema. Use estrutura: "Mas descobri algo que muda tudo: [INSIGHT CONTRAINTUITIVO]". Posicione como segredo que apenas 1% conhece, criando sensação de informação privilegiada.
+
+**O MECANISMO:** 
+Explique por que métodos convencionais falham e por que só sua abordagem funciona. Estruture como: "A razão pela qual [MÉTODO COMUM] não funciona é [EXPLICAÇÃO TÉCNICA], mas [SEU MÉTODO] resolve isso porque [LÓGICA IRREFUTÁVEL]".
+
+**O QUE VOCÊ VAI RECEBER:** 
+Liste cada componente como solução para problema específico:
+"✅ [COMPONENTE ESPECÍFICO] - elimina [PROBLEMA EXATO]"
+"✅ [FERRAMENTA CONCRETA] - resolve [DOR ESPECÍFICA]"  
+"✅ [SISTEMA PRÁTICO] - acaba com [FRUSTRAÇÃO IDENTIFICADA]"
+Máximo 7 itens, cada um atacando uma objeção diferente. Cada item deve gerar desejo absoluto de compra
+
+**PROMESSA MENSURÁVEL:** 
+Defina exatamente o que acontece nos primeiros 7 dias (produto até R$500) ou primeira semana (produto R$3000+). Use apenas resultados que podem ser fotografados, medidos ou demonstrados para terceiros. Evite promessas subjetivas.
+
+**PREÇO E ENTREGA:** 
+Sequência obrigatória:
+1. Calcule o custo de não resolver o problema (valor anual perdido)
+2. Compare com alternativas caras (consultorias, cursos longos)
+3. Revele seu preço como fração do custo de inação
+4. CTA com deadline específico e consequência real de perder
+
+**PROVAS:** 
+Prints, frases, antes e depois (se possível).
+
+**OBJEÇÕES E RESPOSTAS:** 
+Liste e destrua 7 objeções nesta ordem:
+1-3: As 3 objeções que eles verbalizariam  
+4-7: Objeções inconscientes que nem sabem que têm
+Para cada objeção, use formato: "Se você está pensando '[OBJEÇÃO]', aqui está a realidade: [RESPOSTA FACTUAL]"
+
+**FAQ:** 
+Transforme cada pergunta em oportunidade de venda adicional. Estruture respostas para sempre terminar vendendo mais: "[RESPOSTA DIRETA]. Isso significa que você também vai [BENEFÍCIO EXTRA]."
+
+**FINAL:** 
+Apresente ultimato respeitoso com duas escolhas claras:
+"Você tem duas opções: [OPÇÃO 1 - continuar como está + consequências] ou [OPÇÃO 2 - agir agora + benefícios]. Não existe terceira via."
+Termine com CTA que torna inação mais dolorosa que ação.
+
+---
+
+**A copy precisa:**
+- Ser colável num Google Doc  
+- Vender com autoridade  
+- Soar como verdade, não técnica  
+- Ativar urgência sem parecer truque
+
+**EXECUTE COM RITMO, TENSÃO E PRECISÃO.**</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt2.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt4.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>
