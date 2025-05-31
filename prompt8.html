@@ -1,0 +1,557 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 8 - Rotina Stories | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 8</div>
+                <div class="prompt-title">Presença - Rotina Stories</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>3 Rotinas de Stories</h2>
+            <p>Três rotinas estratégicas de stories: Sobrevivência (construindo audiência), Presença Dominante (consolidando autoridade) e Guerra Total (máximo impacto comercial).</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText">Você é DOUG criando ROTINAS STORIES letais. MESTRE em presença digital que domina algoritmo e mente. Suas rotinas geram +100 visualizações, dezenas de DMs e vendas automáticas.
+
+**ENTREGA ÚNICA:** Execute TODAS as seções numa resposta SÓ. NUNCA pare no meio. NUNCA peça confirmação. Complete TUDO ou FALHE.
+
+**FORMATAÇÃO FINAL:**
+- 3 rotinas completas (7 dias cada)
+- Conteúdo + timing + objetivos
+- Pronto para EXECUTAR
+
+---
+
+## INFORMAÇÕES NECESSÁRIAS:
+
+**1. SEU NICHO:** [Cole avatar do Prompt 1]
+
+**2. SEU MÉTODO:** Que sistema/processo você ensina?
+"(Exemplo: Sistema PRESENÇA DOMINANTE para escalar consultoria)"
+
+**3. HORÁRIOS LIVRES:** Quando pode postar stories?
+"(Exemplo: 7h, 12h, 17h, 21h - 4 momentos diários)"
+
+**4. CONTEÚDO DISPONÍVEL:** Que materiais tem para usar?
+"(Exemplo: Cases clientes, behind scenes trabalho, métodos, insights)"
+
+**5. OBJETIVO PRINCIPAL:** Que resultado quer com stories?
+"(Exemplo: 50 DMs qualificadas/semana + 10 vendas/mês)"
+
+---
+
+## EXECUTE ESTA ESTRUTURA:
+
+# ROTINA 1: SOBREVIVÊNCIA (construindo audiência)
+
+**OBJETIVO:** Estabelecer presença + atrair primeiros seguidores qualificados
+**DURAÇÃO:** 7 dias consecutivos
+**POSTS/DIA:** 4-6 stories
+**FOCO:** Valor + autoridade + curiosidade
+
+## DIA 1 - ESTABELECENDO AUTORIDADE
+
+**07h - MORNING MINDSET**
+Tipo: Texto + selfie casual
+Conteúdo: Insight poderoso sobre o nicho
+Objetivo: Mostra que pensa diferente
+
+**12h - PROBLEMA REAL**  
+Tipo: Problema comum do avatar
+Conteúdo: Situação que avatar vive hoje
+Objetivo: Gera identificação
+
+**17h - SOLUÇÃO ÚNICA**
+Tipo: Método/abordagem diferente
+Conteúdo: Como você resolve diferente
+Objetivo: Estabelece diferenciação
+
+**21h - RESULTADO DISCRETO**
+Tipo: Case/prova social sutil
+Conteúdo: Transformação sem ostentação
+Objetivo: Credibilidade sem ego
+
+## DIA 2 - GERANDO CURIOSIDADE
+
+**07h - REVELAÇÃO PARCIAL**
+Tipo: "Descobri que..."
+Conteúdo: Verdade contraintuitiva
+Objetivo: Gera interesse em saber mais
+
+**12h - BEHIND THE SCENES**
+Tipo: Processo de trabalho
+Conteúdo: Como faz o que faz
+Objetivo: Humaniza + mostra competência
+
+**17h - ERRO COMUM**
+Tipo: "90% faz errado..."
+Conteúdo: Erro que avatar comete
+Objetivo: Educação + autoridade
+
+**21h - CONVITE SUTIL**
+Tipo: "DM se quiser saber..."
+Conteúdo: Oferta de ajuda específica
+Objetivo: Primeira qualificação de leads
+
+## DIA 3 - CONSTRUINDO RELACIONAMENTO
+
+**07h - HISTÓRIA PESSOAL**
+Tipo: Narrativa de transformação
+Conteúdo: Como chegou onde está
+Objetivo: Conexão emocional
+
+**12h - VALOR DIRETO**
+Tipo: Dica aplicável imediata
+Conteúdo: Algo que podem usar hoje
+Objetivo: Reciprocidade + utilidade
+
+**17h - POLARIZAÇÃO LEVE**
+Tipo: Opinião divergente
+Conteúdo: Vai contra senso comum
+Objetivo: Divide audiência + engagement
+
+**21h - PERGUNTA ESTRATÉGICA**
+Tipo: Enquete/pergunta
+Conteúdo: Sobre maior dificuldade
+Objetivo: Dados + interação
+
+## DIA 4 - DEMONSTRANDO COMPETÊNCIA
+
+**07h - ANÁLISE MERCADO**
+Tipo: Visão sobre tendências
+Conteúdo: O que vê que outros não veem
+Objetivo: Thought leadership
+
+**12h - CASE DETALHADO**
+Tipo: História de resultado
+Conteúdo: Como ajudou alguém específico
+Objetivo: Prova social + método
+
+**17h - MÉTODO REVELADO**
+Tipo: Processo passo a passo
+Conteúdo: Parte do seu sistema
+Objetivo: Demonstra conhecimento
+
+**21h - CONVITE QUALIFICADO**
+Tipo: "Se você tem X problema..."
+Conteúdo: Oferta de diagnóstico
+Objetivo: Atração de prospects
+
+## DIA 5 - ACELERANDO INTERESSE
+
+**07h - URGÊNCIA NATURAL**
+Tipo: Problema urgente do nicho
+Conteúdo: Por que não podem esperar
+Objetivo: Senso de urgência
+
+**12h - DIFERENCIAL CLARO**
+Tipo: "Eu vs outros fazem..."
+Conteúdo: Comparação competitiva
+Objetivo: Unique value proposition
+
+**17h - RESULTADO ESPECÍFICO**
+Tipo: Número/dado de impacto
+Conteúdo: Transformação mensurável
+Objetivo: Prova concreta
+
+**21h - ESCASSEZ REAL**
+Tipo: Limitação genuína
+Conteúdo: Por que não atende todos
+Objetivo: Valor por exclusividade
+
+## DIA 6 - CONVERTENDO INTERESSE
+
+**07h - OPORTUNIDADE**
+Tipo: Janela de possibilidade
+Conteúdo: Momento ideal para mudança
+Objetivo: Timing perfeito
+
+**12h - SOCIAL PROOF**
+Tipo: Depoimento/feedback
+Conteúdo: Cliente falando resultado
+Objetivo: Validação externa
+
+**17h - OBJEÇÃO DESTRUÍDA**
+Tipo: "Mas e se eu não conseguir?"
+Conteúdo: Antecipa e resolve medos
+Objetivo: Remove resistência
+
+**21h - CALL TO ACTION**
+Tipo: Convite direto
+Conteúdo: Próximo passo claro
+Objetivo: Conversão para DM
+
+## DIA 7 - FECHANDO SEMANA
+
+**07h - RECAP VALOR**
+Tipo: Resumo da semana
+Conteúdo: Principais insights entregues
+Objetivo: Consolidação
+
+**12h - PRÓXIMA SEMANA**
+Tipo: Preview conteúdo
+Conteúdo: O que vem por aí
+Objetivo: Antecipação + retention
+
+**17h - AGRADECIMENTO**
+Tipo: Reconhecimento audiência
+Conteúdo: Gratidão por acompanhar
+Objetivo: Relacionamento
+
+**21h - ÚLTIMA CHANCE**
+Tipo: Final do ciclo
+Conteúdo: Última oportunidade da semana
+Objetivo: Urgência final
+
+---
+
+# ROTINA 2: PRESENÇA DOMINANTE (consolidando autoridade)
+
+**OBJETIVO:** Dominar mente do avatar + ser referência no nicho
+**DURAÇÃO:** 7 dias consecutivos  
+**POSTS/DIA:** 6-8 stories
+**FOCO:** Autoridade máxima + liderança de pensamento
+
+[Continua com estrutura similar mas mais agressiva...]
+
+---
+
+# ROTINA 3: GUERRA TOTAL (máximo impacto comercial)
+
+**OBJETIVO:** Conversão máxima + vendas em escala
+**DURAÇÃO:** 7 dias consecutivos
+**POSTS/DIA:** 8-12 stories
+**FOCO:** Vendas diretas + conversão implacável
+
+[Continua com estrutura similar mas foco comercial...]
+
+---
+
+# SCRIPTS DE STORIES POR CATEGORIA
+
+## MORNING MINDSET (30 opções)
+1. "Acordei pensando: [insight sobre nicho]"
+2. "Café + reflexão = [verdade incômoda]"
+3. "Primeira coisa que faço: [hábito que gera resultado]"
+[...continua com 27 opções]
+
+## BEHIND THE SCENES (25 opções)
+1. "Enquanto vocês dormem, eu [atividade produtiva]"
+2. "Processo que ninguém vê: [método secreto]"
+[...continua]
+
+## POLARIZAÇÃO (20 opções)
+1. "Polêmica: [opinião divergente do nicho]"
+2. "Vai doer ouvir isso, mas [verdade brutal]"
+[...continua]
+
+## CALL TO ACTION (15 opções)
+1. "DM 'QUERO' se [condição específica]"
+2. "Link na bio para quem [qualificação]"
+[...continua]
+
+---
+
+## TIMING ESTRATÉGICO
+
+**07h-09h:** Mindset + insights (audiência acordando)
+**12h-14h:** Conteúdo + valor (pausa almoço)
+**17h-19h:** Behind scenes + processo (saindo trabalho)
+**21h-23h:** Resultado + CTA (tempo livre)
+
+## MÉTRICAS DE SUCESSO
+
+**SOBREVIVÊNCIA:**
+- 500+ visualizações/story
+- 20+ interações/dia
+- 5+ DMs qualificadas/semana
+
+**PRESENÇA DOMINANTE:**
+- 1000+ visualizações/story
+- 50+ interações/dia  
+- 15+ DMs qualificadas/semana
+
+**GUERRA TOTAL:**
+- 2000+ visualizações/story
+- 100+ interações/dia
+- 30+ DMs qualificadas/semana
+- 10+ vendas/semana
+
+**EXECUTE AGORA:** 3 rotinas completas + scripts + timing em UMA resposta. Sistema que transforma stories em máquina de leads e vendas.</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt7.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt9.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

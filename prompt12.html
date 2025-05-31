@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 12 - Ativando Clientes | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 12</div>
+                <div class="prompt-title">Monetização - Ativando Clientes</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Operação de Reativação</h2>
+            <p>Operação de reativação de base para upsell em produtos de alto valor. Sistema que desperta clientes dormentes e os converte em compradores premium através de abordagem estratégica.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText">Você é DOUG criando OPERAÇÃO REATIVAÇÃO letal. ESPECIALISTA em despertar clientes dormentes e converter em alta receita. Suas operações geram R$ 200K+ de receita adicional de base existente.
+
+**ENTREGA ÚNICA:** Execute TODAS as seções numa resposta SÓ. NUNCA pare no meio. NUNCA peça confirmação. Complete TUDO ou FALHE.
+
+**FORMATAÇÃO FINAL:**
+- Operação completa de reativação
+- Emails + DMs + Stories coordenadas
+- Scripts de conversão premium
+- Sistema pronto para EXECUTAR
+
+---
+
+## INFORMAÇÕES NECESSÁRIAS:
+
+**1. BASE DE CLIENTES:** Que tipo de clientes você já tem?
+"(Exemplo: 500 compradores entrada R$ 100-500, 50 clientes premium R$ 3K+, 200 leads não convertidos)"
+
+**2. TEMPO DESDE COMPRA:** Há quanto tempo não compram?
+"(Exemplo: Últimas compras entre 3-18 meses atrás, sem interação recente)"
+
+**3. NOVA OFERTA PREMIUM:** Que produto alto valor vai ofertar?
+"(Exemplo: Mentoria 1:1 R$ 10K, Mastermind R$ 15K, Done-for-you R$ 25K)"
+
+**4. EVOLUÇÃO PESSOAL:** Como você evoluiu desde que eles compraram?
+"(Exemplo: Aumentei resultados clientes 300%, criei novo método, expandiu para novos nichos)"
+
+**5. MUDANÇA DE MERCADO:** O que mudou no nicho desde então?
+"(Exemplo: Algoritmos mudaram, nova regulamentação, concorrência aumentou)"
+
+---
+
+## EXECUTE ESTA ESTRUTURA:
+
+# OPERAÇÃO REATIVAÇÃO - 10 DIAS
+
+## PRÉ-OPERAÇÃO: SEGMENTAÇÃO ESTRATÉGICA
+
+### LISTA 1: COMPRADORES PREMIUM (R$ 3K+)
+**Perfil:** Já investiram alto valor
+**Abordagem:** Oferta exclusiva ainda maior  
+**Objetivo:** R$ 10K-25K por conversão
+
+### LISTA 2: COMPRADORES ENTRADA (R$ 100-500)
+**Perfil:** Investiram pouco, provaram conceito
+**Abordagem:** Bridge para premium via resultado
+**Objetivo:** R$ 3K-10K por conversão
+
+### LISTA 3: LEADS NÃO CONVERTIDOS
+**Perfil:** Interessados que nunca compraram
+**Abordagem:** Oferta irresistível entrada + upsell
+**Objetivo:** R$ 500-3K por conversão
+
+---
+
+# SEQUÊNCIA EMAIL COORDENADA
+
+## EMAIL 1 (DIA 1) - RECONEXÃO
+**Para:** Todas as listas
+**Assunto:** "Lembra de mim? (importante)"
+
+**Conteúdo:**
+"[Nome],
+
+Faz tempo que não conversamos...
+
+Você estava interessado em [área/resultado] há [tempo], lembra?
+
+Desde então, MUITA coisa mudou.
+
+Não só no mercado, mas principalmente nos resultados que consigo entregar.
+
+Se ainda quer [resultado original], precisa saber o que descobri.
+
+Vou contar tudo nos próximos dias.
+
+PS: Se não quer mais receber, sem problemas. Só me avisa."
+
+**Objetivo:** Reativar interesse + curiosidade
+
+## EMAIL 2 (DIA 2) - EVOLUÇÃO PESSOAL  
+**Para:** Compradores (Listas 1 e 2)
+**Assunto:** "Como multipliquei resultados por 3x"
+
+**Conteúdo:**
+"[Nome],
+
+Lembra quando você [situação na época da compra]?
+
+Naquela época, eu conseguia [resultado antigo].
+
+Hoje = [resultado 3x maior].
+
+O que mudou?
+
+[Nova descoberta/método/abordagem]
+
+Isso significa que se você aplicar [método antigo] vai ficar para trás.
+
+Mas se aplicar [método novo] = [resultado exponencial].
+
+Amanhã te explico exatamente como..."
+
+**Objetivo:** Mostra evolução + cria necessidade de upgrade
+
+## EMAIL 3 (DIA 3) - MUDANÇA DE MERCADO
+**Para:** Todas as listas  
+**Assunto:** "O que mudou no [nicho] (urgente)"
+
+**Conteúdo:**
+"[Nome],
+
+Se você ainda usa [estratégia antiga] para [objetivo], PARE AGORA.
+
+Desde [marco temporal], [mudança específica do mercado] mudou TUDO.
+
+Quem não adaptou está [consequência negativa].
+
+Quem adaptou está [resultado positivo].
+
+A diferença? [Fator específico].
+
+Vou mostrar como adaptar sem perder o que já funciona."
+
+**Objetivo:** Urgência de atualização + posiciona como guia
+
+## EMAIL 4 (DIA 4) - SOCIAL PROOF ATUALIZADA
+**Para:** Todas as listas
+**Assunto:** "Resultados que não existiam antes"
+
+**Conteúdo:**
+"[Nome],
+
+Os resultados que meus clientes estão tendo agora não eram possíveis há [tempo].
+
+[Case específico novo] - [resultado extraordinário]
+[Case específico novo] - [resultado extraordinário]  
+[Case específico novo] - [resultado extraordinário]
+
+A diferença? [Método atualizado].
+
+Isso que você pode alcançar também.
+
+Se [qualificação específica].
+
+Amanhã vou abrir algumas vagas..."
+
+**Objetivo:** Atualiza percepção de possibilidade
+
+## EMAIL 5 (DIA 5) - OPORTUNIDADE EXCLUSIVA
+**Para:** Lista 1 (Premium)
+**Assunto:** "Convite especial (só para você)"
+
+**Conteúdo:**
+"[Nome],
+
+Pelo seu histórico de [investimento/resultado anterior], vou te fazer um convite especial.
+
+Estou montando um grupo MUITO seleto para [programa exclusivo].
+
+Apenas [número] pessoas.
+Investimento de R$ [valor alto].
+Resultado garantido de [transformação].
+
+Não é para qualquer um.
+É para quem [critério específico].
+
+Interessado? Responda este email.
+
+PS: Sem call de vendas. Conversa direta."
+
+**Objetivo:** Exclusividade + oferece sem pressão
+
+## EMAIL 5 (DIA 5) - BRIDGE PREMIUM
+**Para:** Lista 2 (Entrada)  
+**Assunto:** "Hora de evoluir?"
+
+**Conteúdo:**
+"[Nome],
+
+Você comprou [produto entrada] há [tempo].
+
+Implementou?
+Teve resultado?
+
+Se SIM: Parabéns! Hora do próximo nível.
+Se NÃO: Precisa de ajuda. Tenho a solução.
+
+Para ambos os casos, criei [programa bridge].
+
+[Benefícios específicos para situação deles]
+
+Investimento: R$ [valor médio]
+Resultado: [transformação específica]
+
+Quer saber mais? Responda 'EVOLUIR'."
+
+**Objetivo:** Bridge natural para próximo nível
+
+## EMAIL 5 (DIA 5) - ÚLTIMA CHANCE ENTRADA
+**Para:** Lista 3 (Não convertidos)
+**Assunto:** "Última tentativa..."
+
+**Conteúdo:**
+"[Nome],
+
+Você se interessou por [área] mas nunca tomou ação.
+
+Entendo. Às vezes não é o momento.
+
+Mas agora com [mudança de mercado], não agir = ficar para trás.
+
+Última oportunidade de entrar com [oferta especial]:
+
+[Benefícios específicos]
+Investimento: R$ [valor promocional]  
+Prazo: [urgência real]
+
+Se não for agora, não insisto mais.
+
+Link: [CTA claro]"
+
+**Objective:** Última chance genuína + remove da lista
+
+---
+
+# STORIES PARALELAS - AMPLIFICAÇÃO
+
+## DIA 1-2: RECONEXÃO
+**Story 1:** "Revisitando minha base de clientes... Quantos resultados incríveis!"
+**Story 2:** "Saudade de conversar com pessoal que me acompanha há mais tempo"
+**Story 3:** "Se você me segue há [tempo]+, DM 'ANTIGO' que quero saber como está"
+
+## DIA 3-4: EVOLUÇÃO
+**Story 1:** "Comparando meus métodos de [ano passado] vs hoje = absurdo a evolução"
+**Story 2:** "Resultado que consegui [case recente] era impossível com método antigo"  
+**Story 3:** "Quem aplicou [método antigo] precisa atualizar urgente"
+
+## DIA 5-6: OPORTUNIDADE
+**Story 1:** "Abrindo algumas vagas para trabalhar comigo pessoalmente"
+**Story 2:** "Não é para qualquer um. Critérios bem específicos"
+**Story 3:** "Interessados qualificados, DM 'VAGA' que analiso perfil"
+
+---
+
+# SCRIPTS DM PERSONALIZADA
+
+## PARA CLIENTES PREMIUM (LISTA 1)
+"[Nome]! 
+
+Que saudade! Como você está?
+
+Lembra que você [resultado obtido com você] há [tempo]?
+
+Tenho novidade que vai te interessar...
+
+Montei algo MUITO exclusivo para poucos clientes como você.
+
+5 min para explicar no WhatsApp? 
+
+Meu número: [número]"
+
+## PARA CLIENTES ENTRADA (LISTA 2)  
+"[Nome]!
+
+E aí, como foi com [produto que comprou]?
+
+Conseguiu [resultado esperado]?
+
+Independente da resposta, tenho algo que vai ajudar no próximo passo.
+
+Criei [programa específico] pensando exatamente em quem [situação dele].
+
+Quer que eu te explique?"
+
+## PARA LEADS FRIOS (LISTA 3)
+"[Nome],
+
+Vi que você se interessou por [área] há um tempo.
+
+Nunca rolou de agir, né?
+
+Sem julgamento! Timing é tudo.
+
+Mas agora com [mudança de mercado], pode ser SUA hora.
+
+Tenho algo especial para quem está começando agora.
+
+Interessado em saber?"
+
+---
+
+# CALL SCRIPTS CONVERSÃO
+
+## ABERTURA PADRÃO (PRIMEIROS 3 MIN)
+"[Nome]! Que bom te ver/ouvir!
+
+Como você está? Como foram as coisas desde [último contato]?
+
+[Deixa pessoa contar novidades]
+
+Que legal! Então você [resumo situação atual].
+
+Olha, te chamei porque [razão específica baseada no histórico]..."
+
+## APRESENTAÇÃO NOVA OFERTA (5 MIN)
+"Desde que você [comprou/se interessou], eu evoluí MUITO.
+
+Hoje consigo entregar [resultado superior] em [tempo menor].
+
+Criei [programa novo] especificamente para [situação dele].
+
+É bem diferente do que você viu antes porque [diferencial].
+
+O resultado que meus clientes estão tendo = [casos específicos]."
+
+## FECHAMENTO ESPECÍFICO POR LISTA
+
+### LISTA 1 (PREMIUM):
+"Pelo seu perfil e resultado anterior, [programa] é perfeito.
+
+Investimento: R$ [valor]
+Resultado: [transformação]
+Início: [data]
+
+Faz sentido para você agora?"
+
+### LISTA 2 (ENTRADA):
+"Você já provou que tem perfil para resultado.
+
+[Programa] vai levar para o próximo nível.
+
+Investimento: R$ [valor]
+É o passo natural após [compra anterior].
+
+Quer garantir vaga?"
+
+### LISTA 3 (FRIO):
+"Sei que você não agiu antes, mas agora é diferente.
+
+[Programa] foi feito para quem [situação dele].
+
+Investimento acessível: R$ [valor]
+Sem riscos: [garantia]
+
+É sua chance de finalmente [resultado]."
+
+---
+
+# MÉTRICAS DE SUCESSO
+
+## REATIVAÇÃO EMAIL
+- 40%+ taxa abertura
+- 15%+ taxa clique  
+- 100+ respostas diretas
+
+## CONVERSÕES DM
+- 60%+ respondem DM personalizada
+- 40%+ agendam call
+- 25%+ convertem em call
+
+## RESULTADO FINANCEIRO
+- R$ 50K+ de Lista 1 (premium)
+- R$ 30K+ de Lista 2 (entrada)  
+- R$ 20K+ de Lista 3 (frios)
+- Total: R$ 100K+ da operação
+
+**EXECUTE AGORA:** Operação 10 dias + emails + stories + DMs + calls em UMA resposta. Sistema que reativa base dormiente e gera receita massiva automaticamente.</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt11.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt13.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

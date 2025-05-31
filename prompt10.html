@@ -1,0 +1,549 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompt 10 - Levantada de Mão | Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            line-height: 1.6;
+        }
+
+        .header {
+            background: #0a0a0a;
+            border-bottom: 1px solid #222;
+            padding: 20px 0;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-content {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .back-btn {
+            color: #aaa;
+            text-decoration: none;
+            font-size: 0.9rem;
+            transition: color 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .back-btn:hover {
+            color: #ffffff;
+        }
+
+        .prompt-info {
+            text-align: center;
+        }
+
+        .prompt-number {
+            font-size: 0.8rem;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .prompt-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .copy-btn {
+            background: #ffffff;
+            color: #000000;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 6px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+        }
+
+        .copy-btn:hover {
+            background: #e0e0e0;
+            transform: translateY(-1px);
+        }
+
+        .copy-btn.copied {
+            background: #22c55e;
+            color: #ffffff;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+        }
+
+        .prompt-description {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-description h2 {
+            font-size: 1.4rem;
+            margin-bottom: 12px;
+            color: #ffffff;
+        }
+
+        .prompt-description p {
+            color: #aaa;
+            line-height: 1.5;
+        }
+
+        .prompt-content {
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            margin-bottom: 40px;
+        }
+
+        .prompt-text {
+            font-family: 'JetBrains Mono', 'Consolas', monospace;
+            background: #000000;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 30px;
+            white-space: pre-wrap;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            color: #e0e0e0;
+            overflow-x: auto;
+        }
+
+        .navigation {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 30px;
+            background: #0a0a0a;
+            border: 1px solid #222;
+            border-radius: 12px;
+        }
+
+        .nav-btn {
+            color: #aaa;
+            text-decoration: none;
+            padding: 12px 20px;
+            border: 1px solid #333;
+            border-radius: 6px;
+            transition: all 0.3s ease;
+            font-size: 0.9rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .nav-btn:hover {
+            color: #ffffff;
+            border-color: #555;
+        }
+
+        .nav-btn.disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        .nav-btn.disabled:hover {
+            color: #aaa;
+            border-color: #333;
+        }
+
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #22c55e;
+            color: #ffffff;
+            padding: 12px 20px;
+            border-radius: 6px;
+            font-weight: 500;
+            transform: translateX(400px);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+        }
+
+        .notification.show {
+            transform: translateX(0);
+        }
+
+        @media (max-width: 768px) {
+            .header-content {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .navigation {
+                flex-direction: column;
+                gap: 16px;
+                text-align: center;
+            }
+
+            .prompt-content, .prompt-description {
+                padding: 20px;
+            }
+
+            .prompt-text {
+                padding: 20px;
+                font-size: 0.85rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="notification" id="notification">
+        Prompt copiado com sucesso!
+    </div>
+
+    <header class="header">
+        <div class="header-content">
+            <a href="index.html" class="back-btn">← Voltar ao início</a>
+            <div class="prompt-info">
+                <div class="prompt-number">PROMPT 10</div>
+                <div class="prompt-title">Monetização - Levantada de Mão</div>
+            </div>
+            <button class="copy-btn" onclick="copyPrompt()">Copiar Prompt</button>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="prompt-description">
+            <h2>Campanha Premium via Stories</h2>
+            <p>Campanha completa para produtos premium via stories e DMs estratégicas. Sistema que identifica interessados qualificados e converte em clientes de alto valor sem parecer vendas.</p>
+        </div>
+
+        <div class="prompt-content">
+            <div class="prompt-text" id="promptText">Você é DOUG criando CAMPANHA LEVANTADA DE MÃO letal. MESTRE em venda invisível que converte qualificados sem resistência. Suas campanhas geram R$ 100K+ em vendas premium via stories.
+
+**ENTREGA ÚNICA:** Execute TODAS as seções numa resposta SÓ. NUNCA pare no meio. NUNCA peça confirmação. Complete TUDO ou FALHE.
+
+**FORMATAÇÃO FINAL:**
+- Campanha stories completa
+- Scripts de DM estratégicas
+- Funil de conversão total
+- Sistema pronto para EXECUTAR
+
+---
+
+## INFORMAÇÕES NECESSÁRIAS:
+
+**1. NICHO ESPECÍFICO:** [Cole avatar do Prompt 1]
+
+**2. OFERTA PREMIUM:** [Cole oferta premium do Prompt 2 - R$ 3000+]
+
+**3. CRITÉRIOS QUALIFICAÇÃO:** Quem pode/deve comprar?
+"(Exemplo: Faturamento R$ 10K+/mês, experiência prévia, investiu em si antes)"
+
+**4. URGÊNCIA LEGÍTIMA:** Por que agir AGORA?
+"(Exemplo: Próxima turma só em 6 meses, preço sobe R$ 2K na semana que vem)"
+
+**5. EXCLUSIVIDADE REAL:** Que limitação genuína existe?
+"(Exemplo: Máximo 8 pessoas, só aceito quem cumpre critérios, trabalho pessoalmente)"
+
+---
+
+## EXECUTE ESTA ESTRUTURA:
+
+# CAMPANHA STORIES - 7 DIAS
+
+## DIA 1: PLANTANDO SEMENTE
+
+### STORY 1 (MANHÃ - 8h)
+**Tipo:** Reflexão casual
+**Conteúdo:** "Tava pensando... Tem uma diferença BRUTAL entre quem quer resultado e quem está PRONTO para resultado."
+**Objetivo:** Planta conceito de preparação
+
+### STORY 2 (TARDE - 14h)  
+**Tipo:** Behind the scenes
+**Conteúdo:** [Trabalhando com cliente premium] "Olha o nível da conversa que tenho com [nome]. Isso é resultado de [critério específico]"
+**Objetivo:** Mostra nível de cliente ideal
+
+### STORY 3 (NOITE - 20h)
+**Tipo:** Insight poderoso
+**Conteúdo:** "A pergunta não é 'quanto custa investir', mas 'quanto custa NÃO investir' quando você está pronto."
+**Objetivo:** Shift mental sobre investimento
+
+## DIA 2: AUTORIDADE MÁXIMA
+
+### STORY 1 (MANHÃ - 8h)
+**Tipo:** Case específico  
+**Conteúdo:** "Lembra do [nome] que contei? Ele saiu de R$ X para R$ Y em Z meses. Quer saber o diferencial?"
+**Objetivo:** Prova social + curiosidade
+
+### STORY 2 (TARDE - 14h)
+**Tipo:** Método revelado
+**Conteúdo:** "O que fez diferença foi [pilar do método]. Sem isso, seria mais um ralando sem resultado."
+**Objetivo:** Demonstra competência única
+
+### STORY 3 (NOITE - 20h)  
+**Tipo:** Contraste brutal
+**Conteúdo:** "Enquanto uns gastam R$ 500 em curso genérico, outros investem R$ 10K em transformação real. Adivinha quem chega lá?"
+**Objetivo:** Educa sobre mentalidade de investimento
+
+## DIA 3: QUALIFICAÇÃO SUTIL
+
+### STORY 1 (MANHÃ - 8h)
+**Tipo:** Pergunta estratégica
+**Conteúdo:** "Curiosidade: quantos aqui já investiram mais de R$ 2K em si mesmos nos últimos 12 meses? 🤔"
+**Objetivo:** Identifica perfil de investidor
+
+### STORY 2 (TARDE - 14h)
+**Tipo:** Revelação importante  
+**Conteúdo:** "Descobri algo: quem nunca investiu pesado em si sempre acha 'caro'. Quem já investiu entende 'valor'."
+**Objetivo:** Separa preparados de não-preparados
+
+### STORY 3 (NOITE - 20h)
+**Tipo:** Critério de trabalho
+**Conteúdo:** "Só trabalho com quem [critério específico]. Não é elitismo, é garantia de resultado."
+**Objetivo:** Estabelece padrão de cliente
+
+## DIA 4: ESCASSEZ GENUÍNA
+
+### STORY 1 (MANHÃ - 8h)  
+**Tipo:** Decisão estratégica
+**Conteúdo:** "Bateu aquela: vou abrir [número] vagas para trabalhar comigo nos próximos [período]."
+**Objetivo:** Anuncia oportunidade limitada
+
+### STORY 2 (TARDE - 14h)
+**Tipo:** Explicação da limitação
+**Conteúdo:** "Por que só [número] vagas? Porque [razão genuína]. Prefiro [qualidade] que [quantidade]."
+**Objetivo:** Justifica escassez
+
+### STORY 3 (NOITE - 20h)
+**Tipo:** Timeline clara
+**Conteúdo:** "Vou anunciar oficialmente [quando]. Quem tem perfil já sabe se encaixa ou não."
+**Objetivo:** Cria antecipação
+
+## DIA 5: SOCIAL PROOF DEVASTADORA
+
+### STORY 1 (MANHÃ - 8h)
+**Tipo:** Resultado atual  
+**Conteúdo:** [Screenshot/depoimento] "Mensagem que recebi ontem. Isso que é [resultado específico]."
+**Objetivo:** Prova recente de competência
+
+### STORY 2 (TARDE - 14h)
+**Tipo:** Transformação completa
+**Conteúdo:** "História do [nome]: estava [situação antes], hoje [situação depois]. Jornada de [tempo]."
+**Objetivo:** Mostra possibilidade real
+
+### STORY 3 (NOITE - 20h)  
+**Tipo:** Padrão de resultados
+**Conteúdo:** "Não é sorte nem exceção. É [método] aplicado com [característica] que gera isso."
+**Objetivo:** Método > acaso
+
+## DIA 6: CALL TO ACTION ELEGANTE
+
+### STORY 1 (MANHÃ - 8h)
+**Tipo:** Último preparation
+**Conteúdo:** "Amanhã anuncio as vagas. Se você [qualificação], já sabe que é para você."
+**Objetivo:** Prepara mente qualificada
+
+### STORY 2 (TARDE - 14h)
+**Tipo:** Autosseleção
+**Conteúdo:** "Não vou 'vender'. Vou apresentar. Quem está pronto reconhece oportunidade na hora."
+**Objetivo:** Remove resistência de venda
+
+### STORY 3 (NOITE - 20h)
+**Tipo:** Antecipação final  
+**Conteúdo:** "Última noite antes do anúncio. Quem merece essa transformação vai estar atento amanhã."
+**Objetivo:** Maximum anticipation
+
+## DIA 7: LEVANTADA DE MÃO
+
+### STORY 1 (MANHÃ - 8h)
+**Tipo:** Anúncio oficial
+**Conteúdo:** "AGORA: [número] vagas para [programa]. Critérios: [lista específica]. Interessados, DM 'PRONTO'."
+**Objetivo:** Call to action claro
+
+### STORY 2 (MANHÃ - 8h30)  
+**Tipo:** Detalhamento
+**Conteúdo:** "O que é: [resumo da oferta]. Para quem: [avatar específico]. Investimento: [valor]. Resultado: [transformação]."
+**Objetivo:** Informações essenciais
+
+### STORY 3 (TARDE - 14h)
+**Tipo:** Update de vagas
+**Conteúdo:** "Update: [número] pessoas mandaram 'PRONTO'. Restam [número] vagas. Critério sendo aplicado."
+**Objetivo:** Urgência real
+
+### STORY 4 (NOITE - 20h)
+**Tipo:** Fechamento
+**Conteúdo:** "Último call: [situação atual das vagas]. Quem está preparado age agora."
+**Objetivo:** Final urgency
+
+---
+
+# SCRIPTS DM - CONVERSÃO
+
+## RESPOSTA AUTOMÁTICA (PALAVRA: PRONTO)
+"Perfeito! 
+
+Antes de tudo, preciso confirmar se você tem o perfil para [programa]:
+
+1) Seu faturamento atual está entre R$ [valor] e R$ [valor]?
+
+2) Já investiu pelo menos R$ [valor] em desenvolvimento nos últimos 12 meses?
+
+3) Tem [tempo] disponíveis por semana para implementar?
+
+Responde as 3 que analiso se faz sentido para ambos."
+
+## FOLLOW-UP QUALIFICADO (SE PASSOU NO FILTRO)
+"Excelente! Pelo seu perfil, [programa] pode ser perfeito.
+
+Vou te explicar como funciona:
+
+[Bullet points do programa]
+
+Investimento: R$ [valor] em [condições]
+
+Quer agendar 15 min para eu te explicar melhor? 
+
+Tenho hoje às [horários] ou amanhã às [horários]."
+
+## FOLLOW-UP NÃO-QUALIFICADO (SE NÃO PASSOU)
+"Obrigado pela honestidade!
+
+Pelo seu perfil atual, [programa] ainda não é o ideal. 
+
+Te sugiro começar com [oferta entrada] para [razão específica].
+
+Quando chegar em [critério], aí sim conversamos sobre [programa premium].
+
+Faz sentido?"
+
+---
+
+# SCRIPTS CALL DE CONVERSÃO
+
+## ABERTURA (PRIMEIROS 2 MINUTOS)
+"E aí [nome], como está?
+
+Obrigado por ter interesse em [programa]. Pelo que conversamos no DM, você tem [critério 1] e [critério 2], correto?
+
+Excelente. Vou te explicar exatamente como [programa] funciona e você decide se faz sentido."
+
+## APRESENTAÇÃO DO PROGRAMA (5 MINUTOS)
+[Estrutura detalhada do que é entregue]
+
+## CASOS DE SUCESSO (3 MINUTOS)  
+[2-3 casos específicos similares ao prospect]
+
+## OBJEÇÕES ANTECIPADAS (5 MINUTOS)
+[Endereça as principais objeções antes que surjam]
+
+## FECHAMENTO (2 MINUTOS)
+"Baseado no que conversamos, [programa] vai te dar [resultado específico] em [prazo].
+
+Investimento é R$ [valor] em [condições].
+
+Faz sentido para você agora?"
+
+---
+
+# MÉTRICAS DE SUCESSO
+
+## STORIES PERFORMANCE
+- 80%+ da base vê stories do dia 7
+- 50+ DMs "PRONTO" 
+- 200+ perguntas/comentários sobre vagas
+
+## QUALIFICAÇÃO
+- 60%+ dos DMs passam no filtro inicial
+- 40%+ agendam call
+- 80%+ que agendam comparecem
+
+## CONVERSÃO FINAL
+- 50%+ das calls convertem
+- 20-30 calls = 10-15 vendas
+- R$ 100K+ em vendas da campanha
+
+---
+
+## ELEMENTOS CRÍTICOS DE SUCESSO
+
+**PACIÊNCIA ESTRATÉGICA:** 6 dias construindo, 1 dia convertendo
+**QUALIFICAÇÃO RÍGIDA:** Só fala com quem tem perfil real
+**SOCIAL PROOF:** Casos específicos e recentes
+**ESCASSEZ REAL:** Limitação genuína e justificada
+**CALL TO ACTION:** Claro, simples, sem confusão
+
+**TESTE DE CAMPANHA:**
+Se não gerar 50+ DMs qualificadas = REFAÇA
+Se conversão < 40% nas calls = REVISE SCRIPTS
+
+**EXECUTE AGORA:** Campanha 7 dias + scripts DM + call de conversão em UMA resposta. Sistema completo que transforma stories em vendas premium automaticamente.</div>
+        </div>
+
+        <div class="navigation">
+            <a href="prompt9.html" class="nav-btn">← Anterior</a>
+            <a href="index.html" class="nav-btn">📋 Menu Principal</a>
+            <a href="prompt11.html" class="nav-btn">Próximo →</a>
+        </div>
+    </div>
+
+    <script>
+        function copyPrompt() {
+            const promptText = document.getElementById('promptText').textContent;
+            const button = document.querySelector('.copy-btn');
+            
+            navigator.clipboard.writeText(promptText).then(function() {
+                // Feedback visual no botão
+                const originalText = button.textContent;
+                button.classList.add('copied');
+                button.textContent = 'Copiado!';
+                
+                // Mostrar notificação
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                
+                // Restaurar botão após 2 segundos
+                setTimeout(() => {
+                    button.classList.remove('copied');
+                    button.textContent = originalText;
+                    notification.classList.remove('show');
+                }, 2000);
+            }).catch(function(err) {
+                // Fallback para dispositivos mais antigos
+                const textArea = document.createElement('textarea');
+                textArea.value = promptText;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+                
+                // Feedback visual
+                const notification = document.getElementById('notification');
+                notification.classList.add('show');
+                setTimeout(() => {
+                    notification.classList.remove('show');
+                }, 2000);
+            });
+        }
+    </script>
+</body>
+</html>

@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prompts Código do Domínio</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: #000000;
+            color: #ffffff;
+            min-height: 100vh;
+            padding: 40px 20px;
+            line-height: 1.5;
+        }
+
+        .container {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 60px;
+            border-bottom: 1px solid #333;
+            padding-bottom: 40px;
+        }
+
+        .header h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            background: linear-gradient(135deg, #ffffff, #888);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .header p {
+            font-size: 1.1rem;
+            color: #aaa;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .categories {
+            display: grid;
+            gap: 40px;
+        }
+
+        .category {
+            background: #111111;
+            border: 1px solid #222;
+            border-radius: 12px;
+            padding: 30px;
+            transition: all 0.3s ease;
+        }
+
+        .category:hover {
+            border-color: #444;
+            transform: translateY(-2px);
+        }
+
+        .category-title {
+            font-size: 1.4rem;
+            font-weight: 600;
+            margin-bottom: 20px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .category-icon {
+            font-size: 1.6rem;
+        }
+
+        .prompt-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 16px;
+        }
+
+        .prompt-card {
+            background: #0a0a0a;
+            border: 1px solid #333;
+            border-radius: 8px;
+            padding: 20px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        .prompt-card:hover {
+            border-color: #555;
+            background: #0f0f0f;
+            transform: translateY(-1px);
+        }
+
+        .prompt-number {
+            font-size: 0.85rem;
+            color: #666;
+            font-weight: 500;
+            margin-bottom: 6px;
+        }
+
+        .prompt-title {
+            font-size: 1.1rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: #ffffff;
+        }
+
+        .prompt-description {
+            font-size: 0.9rem;
+            color: #aaa;
+            line-height: 1.4;
+        }
+
+        .stats {
+            text-align: center;
+            margin-top: 60px;
+            padding: 30px;
+            background: #0a0a0a;
+            border-radius: 12px;
+            border: 1px solid #222;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
+            gap: 24px;
+            margin-top: 20px;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #ffffff;
+            display: block;
+        }
+
+        .stat-label {
+            font-size: 0.9rem;
+            color: #666;
+            margin-top: 4px;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+            
+            .prompt-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .category {
+                padding: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>Prompts Código do Domínio</h1>
+            <p>Sistema completo de prompts para copywriters, consultores e especialistas que querem dominar sua presença digital e monetização.</p>
+        </div>
+
+        <div class="categories">
+            <!-- NARRATIVA -->
+            <div class="category">
+                <div class="category-title">
+                    <span class="category-icon">📝</span>
+                    NARRATIVA
+                </div>
+                <div class="prompt-grid">
+                    <a href="prompt1.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 1</div>
+                        <div class="prompt-title">Avatar</div>
+                        <div class="prompt-description">Dissecação neural completa do cliente ideal com dores, desejos e objeções mapeadas.</div>
+                    </a>
+                    <a href="prompt2.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 2</div>
+                        <div class="prompt-title">Offer Suite</div>
+                        <div class="prompt-description">Duas ofertas estratégicas: micro entrada (R$100-500) e sistema completo (R$3000+).</div>
+                    </a>
+                    <a href="prompt3.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 3</div>
+                        <div class="prompt-title">Copy R$100</div>
+                        <div class="prompt-description">Copy final profissional para produto de entrada, pronta para colar e vender.</div>
+                    </a>
+                    <a href="prompt4.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 4</div>
+                        <div class="prompt-title">Copy R$3000+</div>
+                        <div class="prompt-description">Copy de alto impacto para sistema completo, direto ao ponto e conversão elevada.</div>
+                    </a>
+                    <a href="prompt5.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 5</div>
+                        <div class="prompt-title">Primeira Linha</div>
+                        <div class="prompt-description">Declaração de domínio que instala percepção e bio estratégica para Instagram.</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- PRESENÇA -->
+            <div class="category">
+                <div class="category-title">
+                    <span class="category-icon">🎯</span>
+                    PRESENÇA
+                </div>
+                <div class="prompt-grid">
+                    <a href="prompt6.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 6</div>
+                        <div class="prompt-title">Carrossel</div>
+                        <div class="prompt-description">5 carrosséis de polarização para atrair seguidores qualificados por necessidade.</div>
+                    </a>
+                    <a href="prompt7.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 7</div>
+                        <div class="prompt-title">Lifestyle</div>
+                        <div class="prompt-description">Conteúdos com subtexto de resultado e legendas de ruptura cognitiva.</div>
+                    </a>
+                    <a href="prompt8.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 8</div>
+                        <div class="prompt-title">Rotina Stories</div>
+                        <div class="prompt-description">3 rotinas de stories: Sobrevivência, Presença Dominante e Guerra Total.</div>
+                    </a>
+                </div>
+            </div>
+
+            <!-- MONETIZAÇÃO -->
+            <div class="category">
+                <div class="category-title">
+                    <span class="category-icon">💰</span>
+                    MONETIZAÇÃO
+                </div>
+                <div class="prompt-grid">
+                    <a href="prompt9.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 9</div>
+                        <div class="prompt-title">Demonstração</div>
+                        <div class="prompt-description">Post-DM com iscas irresistíveis + funil ManyChat para captura de leads.</div>
+                    </a>
+                    <a href="prompt10.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 10</div>
+                        <div class="prompt-title">Levantada de Mão</div>
+                        <div class="prompt-description">Campanha completa para produtos premium via stories e DMs estratégicas.</div>
+                    </a>
+                    <a href="prompt11.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 11</div>
+                        <div class="prompt-title">Sequência Stories</div>
+                        <div class="prompt-description">Campanha de stories para vender produtos R$100-500 com conversão direta.</div>
+                    </a>
+                    <a href="prompt12.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 12</div>
+                        <div class="prompt-title">Ativando Clientes</div>
+                        <div class="prompt-description">Operação de reativação de base para upsell em produtos de alto valor.</div>
+                    </a>
+                    <a href="prompt13.html" class="prompt-card">
+                        <div class="prompt-number">PROMPT 13</div>
+                        <div class="prompt-title">Bomba de Valor</div>
+                        <div class="prompt-description">Sequência silenciosa para grupos estratégicos e conversão invisível.</div>
+                    </a>
+                </div>
+            </div>
+        </div>
+
+        <div class="stats">
+            <h3>Sistema Completo</h3>
+            <div class="stats-grid">
+                <div class="stat-item">
+                    <span class="stat-number">13</span>
+                    <div class="stat-label">Prompts</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">3</span>
+                    <div class="stat-label">Categorias</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">100%</span>
+                    <div class="stat-label">Testado</div>
+                </div>
+                <div class="stat-item">
+                    <span class="stat-number">∞</span>
+                    <div class="stat-label">Possibilidades</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
